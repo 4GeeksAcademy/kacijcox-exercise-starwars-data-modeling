@@ -8,7 +8,7 @@ from eralchemy2 import render_er
 Base = declarative_base()
 
 class User (Base):
-    __tablename__ = 'User'
+    __tablename__ = 'user'
     # Here we define columns for the table person
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
@@ -17,7 +17,7 @@ class User (Base):
     favorites = relationship("Favorites", back_populates="user")
 
 class Character (Base):
-    __tablename__ = 'Character'
+    __tablename__ = 'character'
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
@@ -26,7 +26,7 @@ class Character (Base):
     lastname = Column(String(250), nullable=False)
    
 class Spaceship (Base):
-    __tablename__ = 'Spaceship'
+    __tablename__ = 'spaceship'
     # Here we define columns for the table address.
     # Notice that each column is also a normal Python instance attribute.
     id = Column(Integer, primary_key=True)
@@ -44,10 +44,12 @@ class Favorites (Base):
     starship = relationship("Spaceship")
     user_id = Column(Integer, ForeignKey('user.id'))
     character_id = Column(Integer, ForeignKey('character.id'))
-    starship_id = Column(Integer, ForeignKey('starship.id'))
+    starship_id = Column(Integer, ForeignKey('spaceship.id'))
 
-    def to_dict(self):
-        return {}
+
 
 ## Draw from SQLAlchemy base
 render_er(Base, 'diagram.png')
+
+
+
